@@ -20,5 +20,14 @@
 
         <context>testfairy-bamboo</context>
     </web-resource>
+
+        <taskType key="myFirstTask" name="My First Task" class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
+                <!--<description>A task that prints 'Hello, World!'</description>-->
+                <!--<configuration class="com.tf.impl.RequirementTaskConfigurator"/>-->
+                <!--<resource type="freemarker" name="edit" location="editExampleTask.ftl"/>-->
+                <resource type="freemarker" name="view" location="viewExampleTask.ftl"/>
+        </taskType>
+
+
     
 </atlassian-plugin>

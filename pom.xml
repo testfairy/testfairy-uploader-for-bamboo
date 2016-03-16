@@ -83,6 +83,20 @@
             <version>2.2.2-atlassian-1</version>
         </dependency>
 
+<dependency>
+	<groupId>org.apache.avalon.framework</groupId>
+	<artifactId>avalon-framework-impl</artifactId>
+	<version>4.3.1</version>
+</dependency>
+
+<dependency>
+	<groupId>org.tukaani</groupId>
+	<artifactId>xz</artifactId>
+	<version>1.0</version>
+</dependency>
+
+
+
             <dependency>
                     <groupId>com.testfairy</groupId>
                     <artifactId>testfairy-uploader</artifactId>
