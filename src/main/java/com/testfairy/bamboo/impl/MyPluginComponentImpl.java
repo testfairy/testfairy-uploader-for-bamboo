@@ -1,5 +1,6 @@
 package com.testfairy.bamboo.impl;
 
+import com.atlassian.bamboo.build.logger.BuildLogger;
 import com.atlassian.bamboo.task.*;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
@@ -33,18 +34,21 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType
         {
             return "myComponent:" + applicationProperties.getDisplayName();
         }
-        
+
         return "myComponent";
     }
 
     @NotNull
     public TaskResult execute(@NotNull TaskContext taskContext) throws TaskException {
+
+        final BuildLogger buildLogger = taskContext.getBuildLogger();
+
         String API_KEY = "5f8d490c554f63cf7784174bcdcb3c87f2447709";
         String APK_PATH = "/tmp/Ham/out/ham.apk";
-        String KEYSTORE_PATH = "/tmp/Ham/out/debug.keystore";
-        String KEYSTORE_ALIAS = "androiddebugkey";
-        String STORE_PASSWORD = "android";
-        String KEY_PASSWORD = "";
+//        String KEYSTORE_PATH = "/tmp/Ham/out/debug.keystore";
+//        String KEYSTORE_ALIAS = "androiddebugkey";
+//        String STORE_PASSWORD = "android";
+//        String KEY_PASSWORD = "";
 
 
         Options options = new Options.Builder()
@@ -55,29 +59,39 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType
         AndroidUploader uploader = new AndroidUploader.Builder(API_KEY)
                 .setOptions(options)
                 .setApkPath(APK_PATH)
-                .setKeystore(KEYSTORE_PATH, KEYSTORE_ALIAS, STORE_PASSWORD, KEY_PASSWORD)
+                .enableInstrumentation(false)
+//                .setKeystore(KEYSTORE_PATH, KEYSTORE_ALIAS, STORE_PASSWORD, KEY_PASSWORD)
                 .build();
 
         uploader.upload(new Listener() {
+
             public void onUploadStarted() {
-                System.out.println("onUploadStarted");
+//                System.out.println("onUploadStarted");
+                buildLogger.addBuildLogEntry("onUploadStarted");
             }
 
             public void onUploadComplete(Build build) {
-                System.out.println("onUploadComplete");
-                System.out.println(build.appName());
+//                System.out.println("onUploadComplete");
+//                System.out.println(build.appName());
+
+                buildLogger.addBuildLogEntry("onUploadComplete");
+
+                buildLogger.addBuildLogEntry("App name: " +  build.appName());
+                buildLogger.addBuildLogEntry("buildUrl: " +  build.buildUrl());
 
             }
 
             public void onUploadFailed(Throwable throwable) {
-                System.out.println("onUploadFailed");
+//                System.out.println("onUploadFailed");
+                buildLogger.addBuildLogEntry("onUploadFailed");
+                buildLogger.addBuildLogEntry(throwable.getMessage());
             }
 
             public void onProgress(float v) {
 
             }
         });
-//        final BuildLogger buildLogger = taskContext.getBuildLogger();
+
 
 //        final String say = taskContext.getConfigurationMap().get("say");
 
