@@ -1,11 +1,11 @@
 package com.testfairy.bamboo.impl;
 
 import com.atlassian.bamboo.build.logger.BuildLogger;
-import com.atlassian.bamboo.configuration.ConfigurationMap;
 import com.atlassian.bamboo.task.*;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.ApplicationProperties;
+import com.testfairy.bamboo.Strings;
 import com.testfairy.bamboo.api.MyPluginComponent;
 import com.testfairy.uploader.AndroidUploader;
 import com.testfairy.uploader.Build;
@@ -40,7 +40,12 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
 
                 final BuildLogger buildLogger = taskContext.getBuildLogger();
 
-                ConfigurationMap configurationMap = taskContext.getConfigurationMap();
+                final String apiKey = taskContext.getConfigurationMap().get(Strings.API_KEY);
+
+                buildLogger.addBuildLogEntry(apiKey);
+
+//                ConfigurationMap configurationMap = taskContext.getConfigurationMap();
+//                String API_KEY = configurationMap.get(Strings.API_KEY);
 
                 String API_KEY = "5f8d490c554f63cf7784174bcdcb3c87f2447709";
                 String APK_PATH = "/tmp/Ham/out/ham.apk";
