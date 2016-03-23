@@ -27,7 +27,8 @@
                 <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
                 <resource type="freemarker" name="view" location="viewExampleTask.ftl"/>
 		<!--<resource type="download" name="icon" location="images/pluginLogo.png" />-->
-		<resource type="download" name="icon" location="pluginLogo.png" />
+		<!--<resource type="download" name="icon" location="images/testfairy-logo-black.png" />-->
+		<resource type="download" name="icon" location="icon.png"/>
 		<category name="deployment" />
         </taskType>
 

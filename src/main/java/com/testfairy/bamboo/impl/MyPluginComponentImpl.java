@@ -53,7 +53,7 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
                 buildLogger.addBuildLogEntry("appFile: " + appFile);
                 buildLogger.addBuildLogEntry("proguardFile: " + proguardFile);
                 buildLogger.addBuildLogEntry("testersGroups: " + testersGroups);
-                buildLogger.addBuildLogEntry("SHOULD_SEND_EMAILS " + (shouldSendEmails == false ?  "false" : "true"));
+                buildLogger.addBuildLogEntry("SHOULD_SEND_EMAILS? " + (shouldSendEmails == false ?  "false" : "true"));
 
                 Options options = new Options.Builder()
                     .notifyTesters(true)
@@ -67,6 +67,7 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
                 AndroidUploader uploader = new AndroidUploader.Builder(apiKey)
                     .setOptions(options)
                     .setApkPath(appFile)
+                    .setProguardMapPath(proguardFile) // Can be empty. but if set, the file should exist.
                     .enableInstrumentation(false)
 //                    .setHttpUserAgent(Strings.USER_AGENT)
                     .build();

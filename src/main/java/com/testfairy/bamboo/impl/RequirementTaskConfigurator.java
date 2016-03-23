@@ -3,10 +3,13 @@ package com.testfairy.bamboo.impl;
 import com.atlassian.bamboo.collections.ActionParametersMap;
 import com.atlassian.bamboo.task.AbstractTaskConfigurator;
 import com.atlassian.bamboo.task.TaskDefinition;
+import com.atlassian.bamboo.utils.error.ErrorCollection;
 import com.testfairy.bamboo.Strings;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.Map;
 
 public class RequirementTaskConfigurator extends AbstractTaskConfigurator
@@ -21,11 +24,37 @@ public class RequirementTaskConfigurator extends AbstractTaskConfigurator
                 return config;
         }
 
-//        @Override
-//        public void populateContextForCreate(@NotNull final Map<String, Object> context) {
-//                super.populateContextForCreate(context);
-//                context.put(Strings.API_KEY, "Enter api-key");
-//        }
+        @Override
+        public void validate(@NotNull ActionParametersMap params, @NotNull ErrorCollection errorCollection) {
+                super.validate(params, errorCollection);
+
+                /*validate API_KEY*/
+                String apiKey = params.getString(Strings.API_KEY);
+                if (StringUtils.isEmpty(apiKey)) {
+                        errorCollection.addErrorMessage("Please set an TestFairy API KEY ");
+
+                } else if (apiKey.length() != 40) {
+                        errorCollection.addErrorMessage("TestFairy API KEY is invalid");
+
+                }
+
+                /*validate APP_FILE*/
+                String appFile = params.getString(Strings.APP_FILE);
+                File app = new File(appFile);
+                if (!app.exists()) {
+                        errorCollection.addErrorMessage("Path to app file (" + appFile + ") is invalid. Please make sure that this file exists.");
+                }
+
+                /*validate PROGUARD_FILE*/
+                String proguardFile = params.getString(Strings.PROGUARD_FILE);
+                if (StringUtils.isEmpty(proguardFile) == false) {
+                        // only if there is an input, make sure the file
+                        File proguard = new File(proguardFile);
+                        if (!proguard.exists()) {
+                                errorCollection.addErrorMessage("Path to proguard file (" + proguardFile + ") is invalid. Please make sure that this file exists.");
+                        }
+                }
+        }
 
         @Override
         public void populateContextForEdit(@NotNull final Map<String, Object> context, @NotNull final TaskDefinition taskDefinition) {
