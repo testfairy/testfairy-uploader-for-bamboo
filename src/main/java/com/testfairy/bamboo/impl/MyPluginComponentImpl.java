@@ -40,53 +40,51 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
 
                 final BuildLogger buildLogger = taskContext.getBuildLogger();
 
+                final Boolean autoUpdate = null; //= taskContext.getConfigurationMap().get(Strings.autoUpdate);
+                final Boolean shakeForBugReports = null; //= taskContext.getConfigurationMap().get(Strings.autoUpdate);
+
                 final String apiKey = taskContext.getConfigurationMap().get(Strings.API_KEY);
+                final String appFile = taskContext.getConfigurationMap().get(Strings.APP_FILE);
+                final String proguardFile = taskContext.getConfigurationMap().get(Strings.PROGUARD_FILE);
+                final String testersGroups = taskContext.getConfigurationMap().get(Strings.TESTERS_GROUPS);
+                final Boolean shouldSendEmails = taskContext.getConfigurationMap().getAsBoolean(Strings.SEND_EMAILS);
 
-                buildLogger.addBuildLogEntry(apiKey);
-
-//                ConfigurationMap configurationMap = taskContext.getConfigurationMap();
-//                String API_KEY = configurationMap.get(Strings.API_KEY);
-
-                String API_KEY = "5f8d490c554f63cf7784174bcdcb3c87f2447709";
-                String APK_PATH = "/tmp/Ham/out/ham.apk";
-//        String KEYSTORE_PATH = "/tmp/Ham/out/debug.keystore";
-//        String KEYSTORE_ALIAS = "androiddebugkey";
-//        String STORE_PASSWORD = "android";
-//        String KEY_PASSWORD = "";
-
+                buildLogger.addBuildLogEntry("apiKey: " + apiKey);
+                buildLogger.addBuildLogEntry("appFile: " + appFile);
+                buildLogger.addBuildLogEntry("proguardFile: " + proguardFile);
+                buildLogger.addBuildLogEntry("testersGroups: " + testersGroups);
+                buildLogger.addBuildLogEntry("SHOULD_SEND_EMAILS " + (shouldSendEmails == false ?  "false" : "true"));
 
                 Options options = new Options.Builder()
                     .notifyTesters(true)
                     .setComment("Uploading New Build")
+                    .addTesterGroup(testersGroups)
+                    .notifyTesters(shouldSendEmails)
+//                    .setAutoUpdate(autoUpdate)
+//                    .shakeForBugReports(shakeForBugReports)
                     .build();
 
-                AndroidUploader uploader = new AndroidUploader.Builder(API_KEY)
+                AndroidUploader uploader = new AndroidUploader.Builder(apiKey)
                     .setOptions(options)
-                    .setApkPath(APK_PATH)
+                    .setApkPath(appFile)
                     .enableInstrumentation(false)
-//                .setKeystore(KEYSTORE_PATH, KEYSTORE_ALIAS, STORE_PASSWORD, KEY_PASSWORD)
+//                    .setHttpUserAgent(Strings.USER_AGENT)
                     .build();
 
                 uploader.upload(new Listener() {
 
                         public void onUploadStarted() {
-//                System.out.println("onUploadStarted");
                                 buildLogger.addBuildLogEntry("onUploadStarted");
                         }
 
                         public void onUploadComplete(Build build) {
-//                System.out.println("onUploadComplete");
-//                System.out.println(build.appName());
-
                                 buildLogger.addBuildLogEntry("onUploadComplete");
-
                                 buildLogger.addBuildLogEntry("App name: " + build.appName());
                                 buildLogger.addBuildLogEntry("buildUrl: " + build.buildUrl());
 
                         }
 
                         public void onUploadFailed(Throwable throwable) {
-//                System.out.println("onUploadFailed");
                                 buildLogger.addBuildLogEntry("onUploadFailed");
                                 buildLogger.addBuildLogEntry(throwable.getMessage());
                         }
@@ -95,11 +93,6 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
 
                         }
                 });
-
-
-//        final String say = taskContext.getConfigurationMap().get("say");
-
-//        buildLogger.addBuildLogEntry(say);
 
                 return TaskResultBuilder.create(taskContext).success().build();
         }

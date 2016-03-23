@@ -10,23 +10,25 @@
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="testfairy-bamboo"/>
     
-    <!-- add our web resources -->
-    <web-resource key="testfairy-bamboo-resources" name="testfairy-bamboo Web Resources">
-        <dependency>com.atlassian.auiplugin:ajs</dependency>
-        
-        <resource type="download" name="testfairy-bamboo.css" location="/css/testfairy-bamboo.css"/>
-        <resource type="download" name="testfairy-bamboo.js" location="/js/testfairy-bamboo.js"/>
-        <resource type="download" name="images/" location="/images"/>
+    <!--&lt;!&ndash; add our web resources &ndash;&gt;-->
+    <!--<web-resource key="testfairy-bamboo-resources" name="testfairy-bamboo Web Resources">-->
+        <!--<dependency>com.atlassian.auiplugin:ajs</dependency>-->
+        <!---->
+        <!--<resource type="download" name="testfairy-bamboo.css" location="/css/testfairy-bamboo.css"/>-->
+        <!--<resource type="download" name="testfairy-bamboo.js" location="/js/testfairy-bamboo.js"/>-->
+        <!--<resource type="download" name="images/" location="/images"/>-->
 
-        <context>testfairy-bamboo</context>
-    </web-resource>
+        <!--<context>testfairy-bamboo</context>-->
+    <!--</web-resource>-->
 
         <taskType key="TestTairyUploader" name="TestTairy Uploader" class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
-		<category name="Upload"/>
                 <description>A task that Upload yous APK/IPA to TestFairy</description>
                 <configuration class="com.testfairy.bamboo.impl.RequirementTaskConfigurator"/>
                 <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
                 <resource type="freemarker" name="view" location="viewExampleTask.ftl"/>
+		<!--<resource type="download" name="icon" location="images/pluginLogo.png" />-->
+		<resource type="download" name="icon" location="pluginLogo.png" />
+		<category name="deployment" />
         </taskType>
 
 
