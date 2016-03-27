@@ -8,7 +8,11 @@
 			url="${project.organization.url}"/>
 		<param name="plugin-icon">images/testfairy-80x80.jpg</param>
 		<param name="plugin-logo">images/testfairy-80x80.jpg</param>
+
+		<param name="atlassian-licensing-enabled">true</param>
 	</plugin-info>
+
+	<component-import key="pluginLicenseManager" interface="com.atlassian.upm.api.license.PluginLicenseManager"/>
 
 	<!-- add our i18n resource -->
 	<resource type="i18n"
