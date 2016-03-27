@@ -18,6 +18,12 @@
 	<description>Upload yous APK/IPA to TestFairy.</description>
 	<packaging>atlassian-plugin</packaging>
 
+	<scm>
+		<connection>scm:git@github.com:testfairy/testfairy-uploader-for-bamboo.git</connection>
+		<developerConnection>scm:git@github.com:testfairy/testfairy-uploader-for-bamboo.git</developerConnection>
+		<url>https://github.com/testfairy/testfairy-uploader-for-bamboo</url>
+	</scm>
+
 	<properties>
 		<bamboo.version>5.10.3</bamboo.version>
 		<bamboo.data.version>5.10.1</bamboo.data.version>
