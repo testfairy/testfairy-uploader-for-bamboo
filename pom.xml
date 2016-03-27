@@ -6,16 +6,16 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.testfairy.bamboo</groupId>
-    <artifactId>testfairy-bamboo</artifactId>
+    <artifactId>TestFairy-Uploader</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <organization>
-        <name>Example Company</name>
-        <url>http://www.example.com/</url>
+        <name>TestFairy</name>
+        <url>http://www.testfairy.com/</url>
     </organization>
 
-    <name>testfairy-bamboo</name>
-    <description>This is the com.testfairy.bamboo:testfairy-bamboo plugin for Atlassian Bamboo.</description>
+    <name>TestFairy-Uploader</name>
+    <description>Upload yous APK/IPA to TestFairy.</description>
     <packaging>atlassian-plugin</packaging>
 
     <properties>

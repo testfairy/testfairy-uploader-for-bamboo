@@ -21,6 +21,8 @@ public class RequirementTaskConfigurator extends AbstractTaskConfigurator
                 config.put(Strings.PROGUARD_FILE, params.getString(Strings.PROGUARD_FILE));
                 config.put(Strings.TESTERS_GROUPS, params.getString(Strings.TESTERS_GROUPS));
                 config.put(Strings.SEND_EMAILS, String.valueOf(params.getBoolean(Strings.SEND_EMAILS)));
+                config.put(Strings.AUTO_UPDATE, String.valueOf(params.getBoolean(Strings.AUTO_UPDATE)));
+                config.put(Strings.SHAKE_FOR_FEEDBACK, String.valueOf(params.getBoolean(Strings.SHAKE_FOR_FEEDBACK)));
                 return config;
         }
 
@@ -64,7 +66,8 @@ public class RequirementTaskConfigurator extends AbstractTaskConfigurator
                 context.put(Strings.PROGUARD_FILE, taskDefinition.getConfiguration().get(Strings.PROGUARD_FILE));
                 context.put(Strings.TESTERS_GROUPS, taskDefinition.getConfiguration().get(Strings.TESTERS_GROUPS));
                 context.put(Strings.SEND_EMAILS, taskDefinition.getConfiguration().get(Strings.SEND_EMAILS));
-
+                context.put(Strings.AUTO_UPDATE, taskDefinition.getConfiguration().get(Strings.AUTO_UPDATE));
+                context.put(Strings.SHAKE_FOR_FEEDBACK, taskDefinition.getConfiguration().get(Strings.SHAKE_FOR_FEEDBACK));
         }
 
         @Override
@@ -76,5 +79,7 @@ public class RequirementTaskConfigurator extends AbstractTaskConfigurator
                 context.put(Strings.PROGUARD_FILE, taskDefinition.getConfiguration().get(Strings.PROGUARD_FILE));
                 context.put(Strings.TESTERS_GROUPS, taskDefinition.getConfiguration().get(Strings.TESTERS_GROUPS));
                 context.put(Strings.SEND_EMAILS, taskDefinition.getConfiguration().get(Strings.SEND_EMAILS));
+                context.put(Strings.AUTO_UPDATE, taskDefinition.getConfiguration().get(Strings.AUTO_UPDATE));
+                context.put(Strings.SHAKE_FOR_FEEDBACK, taskDefinition.getConfiguration().get(Strings.SHAKE_FOR_FEEDBACK));
         }
 }

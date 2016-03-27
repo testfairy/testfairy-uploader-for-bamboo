@@ -9,4 +9,6 @@ public class Strings {
         public static final String PROGUARD_FILE = "proguard_file";
         public static final String SEND_EMAILS = "send_emails";
         public static final String TESTERS_GROUPS = "testers_groups";
+        public static final String AUTO_UPDATE = "auto_update";
+        public static final String SHAKE_FOR_FEEDBACK = "shake_for_feedback";
 }

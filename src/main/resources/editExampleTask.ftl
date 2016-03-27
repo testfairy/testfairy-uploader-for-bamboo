@@ -3,3 +3,5 @@
 [@ww.textfield labelKey="Path to proguard file" name="proguard_file" cssClass="long-field"/]
 [@ww.textfield labelKey="Testers groups to notify" name="testers_groups"/]
 [@ww.checkbox labelKey="send changelog emails to testers" name="send_emails"/]
+[@ww.checkbox labelKey="Auto-Update" name="auto_update"/]
+[@ww.checkbox labelKey="In-app bug reporting" name="shake_for_feedback"/]

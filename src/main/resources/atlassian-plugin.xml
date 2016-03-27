@@ -22,13 +22,15 @@
     <!--</web-resource>-->
 
         <taskType key="TestTairyUploader" name="TestTairy Uploader" class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
-                <description>A task that Upload yous APK/IPA to TestFairy</description>
+                <description>Upload yous APK/IPA to TestFairy</description>
                 <configuration class="com.testfairy.bamboo.impl.RequirementTaskConfigurator"/>
                 <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
                 <resource type="freemarker" name="view" location="viewExampleTask.ftl"/>
 		<!--<resource type="download" name="icon" location="images/pluginLogo.png" />-->
-		<!--<resource type="download" name="icon" location="images/testfairy-logo-black.png" />-->
-		<resource type="download" name="icon" location="icon.png"/>
+		<resource type="download" name="icon" location="images/testfairy-logo-black.png" />
+		<!--<resource type="download" name="icon" location="icon.png"/>-->
+		<category name="builder" />
+		<category name="tests" />
 		<category name="deployment" />
         </taskType>
 

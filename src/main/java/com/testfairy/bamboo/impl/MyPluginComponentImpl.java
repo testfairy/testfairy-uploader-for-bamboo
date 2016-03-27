@@ -40,38 +40,43 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
 
                 final BuildLogger buildLogger = taskContext.getBuildLogger();
 
-                final Boolean autoUpdate = null; //= taskContext.getConfigurationMap().get(Strings.autoUpdate);
-                final Boolean shakeForBugReports = null; //= taskContext.getConfigurationMap().get(Strings.autoUpdate);
-
                 final String apiKey = taskContext.getConfigurationMap().get(Strings.API_KEY);
                 final String appFile = taskContext.getConfigurationMap().get(Strings.APP_FILE);
                 final String proguardFile = taskContext.getConfigurationMap().get(Strings.PROGUARD_FILE);
                 final String testersGroups = taskContext.getConfigurationMap().get(Strings.TESTERS_GROUPS);
                 final Boolean shouldSendEmails = taskContext.getConfigurationMap().getAsBoolean(Strings.SEND_EMAILS);
+                final Boolean autoUpdate = taskContext.getConfigurationMap().getAsBoolean(Strings.AUTO_UPDATE);
+                final Boolean shakeForFeedback = taskContext.getConfigurationMap().getAsBoolean(Strings.SHAKE_FOR_FEEDBACK);
 
                 buildLogger.addBuildLogEntry("apiKey: " + apiKey);
                 buildLogger.addBuildLogEntry("appFile: " + appFile);
                 buildLogger.addBuildLogEntry("proguardFile: " + proguardFile);
                 buildLogger.addBuildLogEntry("testersGroups: " + testersGroups);
                 buildLogger.addBuildLogEntry("SHOULD_SEND_EMAILS? " + (shouldSendEmails == false ?  "false" : "true"));
+                buildLogger.addBuildLogEntry("AUTO_UPDATE? " + (autoUpdate == false ?  "false" : "true"));
+                buildLogger.addBuildLogEntry("SHAKE_FOR_FEEDBACK? " + (shakeForFeedback == false ?  "false" : "true"));
+
+
+                buildLogger.addBuildLogEntry("Testfairy Version = " + getUserAgent());
 
                 Options options = new Options.Builder()
                     .notifyTesters(true)
-                    .setComment("Uploading New Build")
+                    .setComment("Uploading New Build from Bamboo")
                     .addTesterGroup(testersGroups)
                     .notifyTesters(shouldSendEmails)
-//                    .setAutoUpdate(autoUpdate)
-//                    .shakeForBugReports(shakeForBugReports)
+                    .setAutoUpdate(autoUpdate)
+                    .shakeForBugReports(shakeForFeedback)
                     .build();
 
-                AndroidUploader uploader = new AndroidUploader.Builder(apiKey)
-                    .setOptions(options)
+                AndroidUploader.Builder uploaderBuilder = new AndroidUploader.Builder(apiKey);
+                uploaderBuilder.setOptions(options)
                     .setApkPath(appFile)
                     .setProguardMapPath(proguardFile) // Can be empty. but if set, the file should exist.
-                    .enableInstrumentation(false)
-//                    .setHttpUserAgent(Strings.USER_AGENT)
-                    .build();
+                    .enableInstrumentation(false);
+                uploaderBuilder.setHttpUserAgent(getUserAgent());
 
+
+                AndroidUploader uploader = uploaderBuilder.build();
                 uploader.upload(new Listener() {
 
                         public void onUploadStarted() {
@@ -96,5 +101,10 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
                 });
 
                 return TaskResultBuilder.create(taskContext).success().build();
+        }
+
+        public String getUserAgent() {
+
+                return Strings.USER_AGENT + "-" + getClass().getPackage().getImplementationVersion();
         }
 }
