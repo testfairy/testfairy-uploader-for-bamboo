@@ -1,37 +1,49 @@
-<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
-    <plugin-info>
-        <description>${project.description}</description>
-        <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-icon">images/testfairy-80x80.jpg</param>
-        <param name="plugin-logo">images/testfairy-80x80.jpg</param>
-    </plugin-info>
+<atlassian-plugin key="${atlassian.plugin.key}"
+	name="${project.name}"
+	plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}"
+			url="${project.organization.url}"/>
+		<param name="plugin-icon">images/testfairy-80x80.jpg</param>
+		<param name="plugin-logo">images/testfairy-80x80.jpg</param>
+	</plugin-info>
 
-    <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="testfairy-bamboo"/>
-    
-    <!--&lt;!&ndash; add our web resources &ndash;&gt;-->
-    <!--<web-resource key="testfairy-bamboo-resources" name="testfairy-bamboo Web Resources">-->
-        <!--<dependency>com.atlassian.auiplugin:ajs</dependency>-->
-        <!---->
-        <!--<resource type="download" name="testfairy-bamboo.css" location="/css/testfairy-bamboo.css"/>-->
-        <!--<resource type="download" name="testfairy-bamboo.js" location="/js/testfairy-bamboo.js"/>-->
-        <!--<resource type="download" name="images/" location="/images"/>-->
+	<!-- add our i18n resource -->
+	<resource type="i18n"
+		name="i18n"
+		location="testfairy-bamboo"/>
 
-        <!--<context>testfairy-bamboo</context>-->
-    <!--</web-resource>-->
+	<!--&lt;!&ndash; add our web resources &ndash;&gt;-->
+	<!--<web-resource key="testfairy-bamboo-resources" name="testfairy-bamboo Web Resources">-->
+	<!--<dependency>com.atlassian.auiplugin:ajs</dependency>-->
+	<!---->
+	<!--<resource type="download" name="testfairy-bamboo.css" location="/css/testfairy-bamboo.css"/>-->
+	<!--<resource type="download" name="testfairy-bamboo.js" location="/js/testfairy-bamboo.js"/>-->
+	<!--<resource type="download" name="images/" location="/images"/>-->
 
-        <taskType key="TestTairyUploader" name="TestTairy Uploader" class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
-                <description>Upload yous APK/IPA to TestFairy</description>
-                <configuration class="com.testfairy.bamboo.impl.RequirementTaskConfigurator"/>
-                <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
-                <resource type="freemarker" name="view" location="viewExampleTask.ftl"/>
-		<resource type="download" name="icon" location="images/testfairy-80x80.jpg" />
-		<category name="builder" />
-		<category name="tests" />
-		<category name="deployment" />
-        </taskType>
+	<!--<context>testfairy-bamboo</context>-->
+	<!--</web-resource>-->
+
+	<taskType key="TestTairyUploader"
+		name="TestTairy Uploader"
+		class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
+		<description>Upload yous APK/IPA to TestFairy</description>
+		<configuration class="com.testfairy.bamboo.impl.RequirementTaskConfigurator"/>
+		<resource type="freemarker"
+			name="edit"
+			location="editExampleTask.ftl"/>
+		<resource type="freemarker"
+			name="view"
+			location="viewExampleTask.ftl"/>
+		<resource type="download"
+			name="icon"
+			location="images/testfairy-80x80.jpg"/>
+		<category name="builder"/>
+		<category name="tests"/>
+		<category name="deployment"/>
+	</taskType>
 
 
-    
 </atlassian-plugin>
