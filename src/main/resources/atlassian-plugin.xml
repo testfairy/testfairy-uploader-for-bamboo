@@ -3,8 +3,8 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-icon">images/pluginIcon.png</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
+        <param name="plugin-icon">images/testfairy-80x80.jpg</param>
+        <param name="plugin-logo">images/testfairy-80x80.jpg</param>
     </plugin-info>
 
     <!-- add our i18n resource -->
@@ -26,9 +26,7 @@
                 <configuration class="com.testfairy.bamboo.impl.RequirementTaskConfigurator"/>
                 <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
                 <resource type="freemarker" name="view" location="viewExampleTask.ftl"/>
-		<!--<resource type="download" name="icon" location="images/pluginLogo.png" />-->
-		<resource type="download" name="icon" location="images/testfairy-logo-black.png" />
-		<!--<resource type="download" name="icon" location="icon.png"/>-->
+		<resource type="download" name="icon" location="images/testfairy-80x80.jpg" />
 		<category name="builder" />
 		<category name="tests" />
 		<category name="deployment" />
