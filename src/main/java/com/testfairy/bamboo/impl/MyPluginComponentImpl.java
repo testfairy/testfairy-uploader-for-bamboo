@@ -105,6 +105,7 @@ public class MyPluginComponentImpl implements MyPluginComponent, TaskType {
 
         public String getUserAgent() {
 
-                return Strings.USER_AGENT + "-" + getClass().getPackage().getImplementationVersion();
+//                return Strings.USER_AGENT + "-" + getClass().getPackage().getImplementationVersion();
+                return Strings.USER_AGENT + "-1.0.0";
         }
 }
