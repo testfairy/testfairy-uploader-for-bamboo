@@ -21,7 +21,7 @@
         <!--<context>testfairy-bamboo</context>-->
     <!--</web-resource>-->
 
-        <taskType key="TestTairyUploader" name="TestTairy Uploader" class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
+        <taskType key="TestFairyUploader" name="TestFairy Uploader" class="com.testfairy.bamboo.impl.MyPluginComponentImpl">
                 <description>Upload yous APK/IPA to TestFairy</description>
                 <configuration class="com.testfairy.bamboo.impl.RequirementTaskConfigurator"/>
                 <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
